@@ -1,0 +1,26 @@
+---
+# tasks file for webserver
+
+- name: Installation des paquets apache2, php
+  apt:
+    name: 
+      - apache2
+      - php
+      - php-cli
+      - php-common
+      - php-curl
+      - php-zip
+      - php-gd
+      - php-mysql
+      - php-xml
+      - php-mbstring
+      - php-json
+      - php-intl
+    state: present
+    update_cache: true
+
+- name: Démarrage du service Apache2
+  ansible.builtin.service:
+    name: apache2
+    state: started
+    enabled: true

@@ -1,0 +1,18 @@
+---
+
+# WEB SERVER AND WORDPRESS
+- hosts: web
+  become: true
+  vars_files: vars/main.yml
+
+  roles:
+    - webserver
+    - wordpress-install
+
+# DATABASE SERVER
+- hosts: db
+  become: true
+  vars_files: vars/main.yml
+
+  roles:
+    - dbserver

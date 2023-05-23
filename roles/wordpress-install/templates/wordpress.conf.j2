@@ -1,0 +1,12 @@
+<VirtualHost *:{{ http_port }}>
+    ServerAdmin {{ http_contact }}
+    DocumentRoot /var/www/html/wordpress
+    ServerName {{ http_host }}
+    <Directory /var/www/html/wordpress/>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

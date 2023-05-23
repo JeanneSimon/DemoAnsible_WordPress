@@ -1,0 +1,21 @@
+---
+
+# variables ansible
+ansible_user: "ansible"
+ansible_become_pass: "Azerty1"
+
+# variables database
+mysql_dbname: "wordpressdb"
+mysql_user: "admindb"
+mysql_password: "Azerty1"
+root_password: "Azerty1"
+
+# variables servers
+webserver_host: "192.168.10.11"
+dbserver_host: "192.168.10.12"
+
+# variables web
+http_contact: "webmaster@localhost"
+http_host: "domain"
+http_port: "80"
+

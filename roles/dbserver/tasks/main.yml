@@ -1,0 +1,35 @@
+---
+# tasks file for dbserver
+
+- name: Installation de MariaDB
+  apt:
+    name: ['mariadb-server', 'python3-mysqldb']
+    state: present
+    update_cache: yes
+
+- name: "Création de la base de données {{ mysql_dbname }} sur MariaDB"
+  mysql_db:
+    name: "{{ mysql_dbname }}"
+    state: present
+
+- name: "Création de l'utilisateur {{ mysql_user }}"
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_dbname }}.*:ALL"
+    host: "{{ webserver_host }}"
+    state: present
+
+- name: Allow external MySQL connections (1/2)
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: '^skip-external-locking'
+    line: "# skip-external-locking"
+  notify: restart_mariadb
+
+- name: Allow external MySQL connections (2/2)
+  lineinfile:
+    path: /etc/mysql/mariadb.conf.d/50-server.cnf
+    regexp: '^bind-address'
+    line: "# bind-address"
+  notify: restart_mariadb
